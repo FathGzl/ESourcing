@@ -5,10 +5,7 @@ namespace ESourcing.Sourcing.Data.Interface
 {
     public interface ISourcingContext
     {
-        public interface ISourcingContext
-        {
-            IMongoCollection<Auction> Auctions { get; }
-            IMongoCollection<Bid> Bids { get; }
-        }
+        IMongoCollection<Auction> Auctions { get; }
+        IMongoCollection<Bid> Bids { get; }
     }
 }
