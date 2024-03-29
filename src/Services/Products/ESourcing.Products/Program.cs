@@ -15,6 +15,7 @@ builder.Services.AddSingleton<IProductDatabaseSettings>(sp => sp.GetRequiredServ
 
 #region Prodject Dependencies
 builder.Services.AddTransient<IProductContext, ProductContext>();
+builder.Services.AddTransient<IProductRepository, ProductRepository>();
 #endregion
 
 
