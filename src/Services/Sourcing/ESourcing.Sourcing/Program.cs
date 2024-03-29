@@ -1,5 +1,7 @@
 using ESourcing.Sourcing.Data;
 using ESourcing.Sourcing.Data.Interface;
+using ESourcing.Sourcing.Repositories.Interfaces;
+using ESourcing.Sourcing.Repositories;
 using ESourcing.Sourcing.Settings;
 using Microsoft.Extensions.Options;
 
@@ -13,6 +15,7 @@ builder.Services.AddSingleton<ISourcingDatabaseSettings>(sp => sp.GetRequiredSer
 
 #region Prodject Dependencies
 builder.Services.AddTransient<ISourcingContext, SourcingContext>();
+builder.Services.AddTransient<IAuctionRepository, AuctionRepository>();
 #endregion
 
 
