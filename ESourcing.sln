@@ -19,7 +19,19 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ApiGateway", "ApiGateway", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WebApp", "WebApp", "{33FD3442-0EA3-4A5A-84AD-D00769E45E61}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ESourcing.Products", "src\Services\Products\ESourcing.Products\ESourcing.Products.csproj", "{558DE18A-0471-41FB-B465-27BD9EE0ACF1}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{558DE18A-0471-41FB-B465-27BD9EE0ACF1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{558DE18A-0471-41FB-B465-27BD9EE0ACF1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{558DE18A-0471-41FB-B465-27BD9EE0ACF1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{558DE18A-0471-41FB-B465-27BD9EE0ACF1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
@@ -31,6 +43,7 @@ Global
 		{13AF84C9-CBF2-4DED-AA0E-31D3A5D3DEFC} = {133A3EA8-CB95-4BAE-B6E4-987173E48734}
 		{DBBDA568-F530-4AB7-B97F-5FE5AAE74CB6} = {D18A4EF0-F5E2-4156-B80F-2E43B75B9033}
 		{33FD3442-0EA3-4A5A-84AD-D00769E45E61} = {D18A4EF0-F5E2-4156-B80F-2E43B75B9033}
+		{558DE18A-0471-41FB-B465-27BD9EE0ACF1} = {8FCD1913-110F-4AC7-A6D4-E4CCCC7BEC30}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2C1BDA94-9A5B-40D1-AAB3-9DFA7B7A870F}
