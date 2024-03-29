@@ -1,4 +1,4 @@
-﻿using Esourcing.Sourcing.Entities;
+﻿using ESourcing.Sourcing.Entities;
 using MongoDB.Driver;
 
 namespace Esourcing.Sourcing.Data

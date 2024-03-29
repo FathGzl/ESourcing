@@ -1,5 +1,5 @@
 ﻿using ESourcing.Sourcing.Data.Interface;
-using Esourcing.Sourcing.Entities;
+using ESourcing.Sourcing.Entities;
 using ESourcing.Sourcing.Settings;
 using MongoDB.Driver;
 using Esourcing.Sourcing.Data;
@@ -19,7 +19,7 @@ namespace ESourcing.Sourcing.Data
             SourcingContextSeed.SeedData(Auctions);
         }
 
-        public IMongoCollection<Auction> Auctions { get; }
+        public IMongoCollection<Auction> Auctions { get; set; }
 
         public IMongoCollection<Bid> Bids { get; }
     }

@@ -1,7 +1,7 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace Esourcing.Sourcing.Entities
+namespace ESourcing.Sourcing.Entities
 {
     public class Bid
     {
