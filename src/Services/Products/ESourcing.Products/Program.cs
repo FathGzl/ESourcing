@@ -1,3 +1,7 @@
+using ESourcing.Products.Data.Interfaces;
+using ESourcing.Products.Data;
+using ESourcing.Products.Repositories.Interfaces;
+using ESourcing.Products.Repositories;
 using ESourcing.Products.Settings;
 using Microsoft.Extensions.Options;
 
@@ -9,6 +13,9 @@ builder.Services.Configure<ProductDatabaseSettings>(builder.Configuration.GetSec
 builder.Services.AddSingleton<IProductDatabaseSettings>(sp => sp.GetRequiredService<IOptions<ProductDatabaseSettings>>().Value);
 #endregion
 
+#region Prodject Dependencies
+builder.Services.AddTransient<IProductContext, ProductContext>();
+#endregion
 
 
 builder.Services.AddControllers();
