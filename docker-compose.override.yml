@@ -8,6 +8,7 @@ services:
        - ${WEBAPP_STORAGE_HOME}/site:/data/db
     ports:
        - "27017:27017"
+
   esourcing.products:
     container_name: esourcingproducts
     environment:
@@ -17,6 +18,19 @@ services:
         - sourcingdb
     ports:
       - "8000:80"
+    volumes:
+      - ${HOME}/ASP.NET/Https:/root/.aspnet/https:ro
+      - ${HOME}/.microsoft/usersecrets/:/root/.microsoft/usersecrets
+
+  esourcing.sourcing:
+    container_name: esourcingsourcings
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - "SourcingDatabaseSettings:ConnectionString=mongodb://sourcingdb:27017"
+    depends_on:
+        - sourcingdb
+    ports:
+      - "8001:80"
     volumes:
       - ${HOME}/ASP.NET/Https:/root/.aspnet/https:ro
       - ${HOME}/.microsoft/usersecrets/:/root/.microsoft/usersecrets
