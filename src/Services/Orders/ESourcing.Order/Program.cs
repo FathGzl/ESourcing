@@ -1,3 +1,5 @@
+using ESourcing.Order.Extensions;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -11,5 +13,5 @@ var app = builder.Build();
 app.UseAuthorization();
 
 app.MapControllers();
-
+app.MigrateDatabase();
 app.Run();
