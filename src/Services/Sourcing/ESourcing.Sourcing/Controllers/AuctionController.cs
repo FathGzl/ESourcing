@@ -1,5 +1,10 @@
-﻿using ESourcing.Sourcing.Entities;
+﻿using AutoMapper;
+using ESourcing.Sourcing.Entities;
+using ESourcing.Sourcing.Repositories;
 using ESourcing.Sourcing.Repositories.Interfaces;
+using EventBusRabbitMQ.Core;
+using EventBusRabbitMQ.Event;
+using EventBusRabbitMQ.Producer;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
@@ -11,14 +16,17 @@ namespace ESourcing.Sourcing.Controllers
     public class AuctionController : ControllerBase
     {
         private readonly IAuctionRepository _auctionRepository;
+        private readonly IBidRepository _bidRepository;
+        private readonly IMapper _mapper;
+        private readonly EventBusRabbitMQProducer _eventBus;
         private readonly ILogger<AuctionController> _logger;
 
-        public AuctionController(
-            IAuctionRepository auctionRepository,
-            IBidRepository bidRepository,
-            ILogger<AuctionController> logger)
+        public AuctionController(IAuctionRepository auctionRepository, IBidRepository bidRepository, IMapper mapper, EventBusRabbitMQProducer eventBus, ILogger<AuctionController> logger)
         {
-            _auctionRepository = auctionRepository;  
+            _auctionRepository = auctionRepository;
+            _bidRepository = bidRepository;
+            _mapper = mapper;
+            _eventBus = eventBus;
             _logger = logger;
         }
 
@@ -69,5 +77,52 @@ namespace ESourcing.Sourcing.Controllers
         {
             return Ok(await _auctionRepository.DeleteAsync(id));
         }
+
+
+        [HttpPost("CompleteAuction")]
+        [ProducesResponseType((int)HttpStatusCode.NotFound)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType((int)HttpStatusCode.Accepted)]
+        public async Task<ActionResult> CompleteAuction([FromBody] string id)
+        {
+            Auction auction = await _auctionRepository.GetAuctionAsync(id);
+            if (auction == null)
+                return NotFound();
+
+            if (auction.Status != (int)Status.Active)
+            {
+                _logger.LogError("Auction can not be completed");
+                return BadRequest();
+            }
+
+            Bid bid = await _bidRepository.GetWinnerBidAsync(id);
+            if (bid == null)
+                return NotFound();
+
+            OrderCreateEvent eventMessage = _mapper.Map<OrderCreateEvent>(bid);
+            eventMessage.Quantity = auction.Quantity;
+
+            auction.Status = (int)Status.Closed;
+            bool updateResponse = await _auctionRepository.UpdateAsync(auction);
+            if (!updateResponse)
+            {
+                _logger.LogError("Auction can not updated");
+                return BadRequest();
+            }
+
+            try
+            {
+                _eventBus.Publish(EventBusConstants.OrderCreateQueue, eventMessage);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "ERROR Publishing integration event: {EventId} from {AppName}", eventMessage.Id, "Sourcing");
+                throw;
+            }
+
+            return Accepted();
+        }
+
+
     }
 }

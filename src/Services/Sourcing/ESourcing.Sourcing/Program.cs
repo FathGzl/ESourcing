@@ -20,6 +20,8 @@ builder.Services.AddSingleton<ISourcingDatabaseSettings>(sp => sp.GetRequiredSer
 builder.Services.AddTransient<ISourcingContext, SourcingContext>();
 builder.Services.AddTransient<IAuctionRepository, AuctionRepository>();
 builder.Services.AddTransient<IBidRepository, BidRepository>();
+
+builder.Services.AddAutoMapper(typeof(Program));
 #endregion
 
 #region EventBus
