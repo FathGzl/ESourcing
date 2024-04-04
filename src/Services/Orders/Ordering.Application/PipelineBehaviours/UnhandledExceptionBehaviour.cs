@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace Ordering.Application.PipelineBehaviours
 {
-    public class UnhandledExceptionBehaviourr<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
+    public class UnhandledExceptionBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
     {
         private readonly ILogger<TRequest> _logger;
 
-        public UnhandledExceptionBehaviourr(ILogger<TRequest> logger)
+        public UnhandledExceptionBehaviour(ILogger<TRequest> logger)
         {
             _logger = logger;
         }
