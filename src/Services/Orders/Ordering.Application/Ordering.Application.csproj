@@ -16,10 +16,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Handlers\" />
-    <Folder Include="Mapper\" />
     <Folder Include="Queries\" />
     <Folder Include="PipelineBehaviours\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Ordering.Domain\Ordering.Domain.csproj" />
   </ItemGroup>
 
 </Project>
