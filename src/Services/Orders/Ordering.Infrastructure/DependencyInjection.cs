@@ -19,7 +19,8 @@ namespace Ordering.Infrastructure
 
 
             //Add Repositories
-
+            services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
+            services.AddTransient<IOrderRepository, OrderRepository>();
             return services;
         }
     }
