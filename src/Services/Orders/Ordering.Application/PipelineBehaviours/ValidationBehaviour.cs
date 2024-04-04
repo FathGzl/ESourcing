@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Ordering.Application.PipelineBehaviours
 {
-    public class ValidationBehavior<TRequset, TResponse> : IPipelineBehavior<TRequset, TResponse>
+    public class ValidationBehaviour<TRequset, TResponse> : IPipelineBehavior<TRequset, TResponse>
     {
         private readonly IEnumerable<IValidator<TRequset>> _validators;
         public Task<TResponse> Handle(TRequset request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)
