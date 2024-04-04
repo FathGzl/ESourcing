@@ -16,7 +16,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Queries\" />
     <Folder Include="PipelineBehaviours\" />
   </ItemGroup>
 
