@@ -11,6 +11,12 @@ namespace Ordering.Application.PipelineBehaviours
     public class ValidationBehaviour<TRequset, TResponse> : IPipelineBehavior<TRequset, TResponse>
     {
         private readonly IEnumerable<IValidator<TRequset>> _validators;
+
+        public ValidationBehaviour(IEnumerable<IValidator<TRequset>> validators)
+        {
+            _validators = validators;
+        }
+
         public Task<TResponse> Handle(TRequset request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)
         {
             var context = new ValidationContext<TRequset>(request);
