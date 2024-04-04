@@ -1,6 +1,6 @@
 using ESourcing.Order.Extensions;
 using Ordering.Infrastructure;
-
+using Ordering.Application;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,6 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services.AddInfrastructure(builder.Configuration);
+builder.Services.AddApplication();
 //builder.Services.AddInfrastructure();
 var app = builder.Build();
 
